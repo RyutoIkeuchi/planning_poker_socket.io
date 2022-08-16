@@ -1,4 +1,3 @@
-
 const express = require('express');
 const app = express();
 
@@ -16,10 +15,15 @@ const PORT = 4000;
 io.on('connection', (socket) => {
 	console.log('クライアントと接続しました');
 
+	socket.on('join', (data) => {
+		socket.join(data.room_id);
+		io.to(data.room_id).emit('add_user_response', data);
+	});
+
 	socket.on('send_message', (data) => {
 		console.log('受信', data);
 
-		io.emit('received_message', data);
+		io.emit('message_response', data);
 	});
 
 	socket.on('disconnect', () => {
