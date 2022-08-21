@@ -20,10 +20,16 @@ io.on('connection', (socket) => {
 		io.to(data.room_id).emit('add_user_response', data);
 	});
 
-	socket.on('send_message', (data) => {
-		console.log('受信', data);
+	socket.on('send_select_number', (data) => {
+		console.log('他のユーザーが選んだ番号が送信されました', data);
 
-		io.emit('message_response', data);
+		io.emit('select_number_response', data);
+	});
+
+	socket.on('send_agenda_title', (data) => {
+		console.log('ホストユーザーが書いたタイトルが送信されました', data);
+
+		io.emit('agenda_title_response', data);
 	});
 
 	socket.on('disconnect', () => {
