@@ -17,19 +17,19 @@ io.on('connection', (socket) => {
 
 	socket.on('join', (data) => {
 		socket.join(data.room_id);
-		io.to(data.room_id).emit('add_user_response', data);
+		io.to(data.room_id).emit('response_add_user', data);
 	});
 
 	socket.on('send_select_number', (data) => {
 		console.log('他のユーザーが選んだ番号が送信されました', data);
 
-		io.emit('select_number_response', data);
+		io.emit('response_select_number', data);
 	});
 
 	socket.on('send_agenda_title', (data) => {
 		console.log('ホストユーザーが書いたタイトルが送信されました', data);
 
-		io.emit('agenda_title_response', data);
+		io.emit('response_agenda_title', data);
 	});
 
 	socket.on('disconnect', () => {
