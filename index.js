@@ -32,6 +32,12 @@ io.on('connection', (socket) => {
 		io.emit('response_agenda_title', data);
 	});
 
+	socket.on('send_select_card_state',(data) => {
+		console.log('ホストユーザーから選ばれたカードの状態が送信されました',data);
+
+		io.emit('response_select_card_state',data);
+	})
+
 	socket.on('disconnect', () => {
 		console.log('クライアントとの接続が切れました');
 	});
