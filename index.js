@@ -17,25 +17,25 @@ io.on('connection', (socket) => {
 
 	socket.on('join', (data) => {
 		socket.join(data.room_id);
-		io.to(data.room_id).emit('response_add_user', data);
+		io.to(data.room_id).emit('res_add_user', data);
 	});
 
-	socket.on('send_select_number', (data) => {
+	socket.on('send_selected_number_card', (data) => {
 		console.log('他のユーザーが選んだ番号が送信されました', data);
 
-		io.emit('response_select_number', data);
+		io.emit('res_selected_number_card', data);
 	});
 
 	socket.on('send_agenda_title', (data) => {
 		console.log('ホストユーザーが書いたタイトルが送信されました', data);
 
-		io.emit('response_agenda_title', data);
+		io.emit('res_agenda_title', data);
 	});
 
-	socket.on('send_select_card_state',(data) => {
+	socket.on('send_poker_status',(data) => {
 		console.log('ホストユーザーから選ばれたカードの状態が送信されました',data);
 
-		io.emit('response_select_card_state',data);
+		io.emit('res_poker_status',data);
 	})
 
 	socket.on('disconnect', () => {
